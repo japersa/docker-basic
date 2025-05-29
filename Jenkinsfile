@@ -13,7 +13,16 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'esto sirve para construir'
+                // Restore and build .NET backend
+                dir('10-net9-remix-pg-env/Backend') {
+                    sh 'dotnet restore' // Restores .NET dependencies
+                    sh 'dotnet build --configuration Release' // Builds the .NET backend in Release mode
+                }
+                // Install and build Node.js/Remix frontend
+                dir('10-net9-remix-pg-env/Frontend') {
+                    sh 'npm install' // Installs Node.js dependencies
+                    sh 'npm run build' // Builds the Remix frontend
+                }
             }
         }
         stage('Test') {
