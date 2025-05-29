@@ -38,6 +38,23 @@ pipeline {
                 }
             }
         }
+        // This stage performs static code analysis on the .NET backend using SonarQube.
+        // It uses the SonarScanner for .NET to send code quality and security data to the SonarQube server.
+        // The analysis is started with 'dotnet sonarscanner begin', then the project is built, and finally 'dotnet sonarscanner end' sends the results.
+        // The SonarQube environment and authentication token are injected from Jenkins global configuration and environment variables.
+        // 'withSonarQubeEnv' is a block provided by the SonarQube Scanner plugin for Jenkins.
+        stage('SonarQube Analysis') {
+            steps {
+                // Run SonarQube analysis for .NET backend
+                withSonarQubeEnv('SonarQube') {
+                    dir('10-net9-remix-pg-env/Backend') {
+                        sh 'dotnet sonarscanner begin /k:"backend-project" /d:sonar.host.url=$SONARQUBE_URL /d:sonar.login=$SONARQUBE_TOKEN' // Start SonarQube analysis
+                        sh 'dotnet build' // Build the backend for analysis
+                        sh 'dotnet sonarscanner end /d:sonar.login=$SONARQUBE_TOKEN' // End SonarQube analysis and send results
+                    }
+                }
+            }
+        }
         stage('Deploy') {
             steps {
                 echo 'esto sirve para desplegar'
