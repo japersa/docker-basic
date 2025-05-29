@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    tools {
+        dotnetsdk 'dotnet-9.0.203'
+        nodejs 'node-20.19.2'
+    }
+
     stages {
         stage('Build') {
             steps {
