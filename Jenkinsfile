@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         SONARQUBE_URL = 'http://192.168.220.131:9000'
+        SONARQUBE_TOKEN = 'sqa_b3a041656e7bb4f809ead486172be9cda3642e61'
     }
 
     tools {
