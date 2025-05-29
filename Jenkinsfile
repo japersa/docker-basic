@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        SONARQUBE_URL = 'http://192.168.220.131:9000'
+    }
+
     tools {
         dotnetsdk 'dotnet-9.0.203'
         nodejs 'node-20.19.2'
