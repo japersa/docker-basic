@@ -27,7 +27,14 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'esto sirve para probar'
+                // Run .NET backend tests
+                dir('10-net9-remix-pg-env/Backend') {
+                    sh 'dotnet test --no-build --verbosity normal' // Runs backend unit tests
+                }
+                // Run Node.js/Remix frontend tests
+                dir('10-net9-remix-pg-env/Frontend') {
+                    sh 'npm test' // Runs frontend tests
+                }
             }
         }
         stage('Deploy') {
