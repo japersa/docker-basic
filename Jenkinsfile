@@ -86,6 +86,14 @@ pipeline {
                 }
             }
         }
+        stage('Backend - Publish') {
+            steps {
+                dir('10-net9-remix-pg-env/Backend') {
+                    echo 'Publishing the project...'
+                    sh 'dotnet publish --configuration Release --no-build -o ./publish'
+                }
+            }
+        }
     }
 
     post {
