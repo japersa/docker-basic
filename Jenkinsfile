@@ -64,6 +64,14 @@ pipeline {
                 }
             }
         }
+        stage('Frontend - Test') {
+            steps {
+                dir('10-net9-remix-pg-env/Frontend') {
+                    echo 'Running tests...'
+                    sh 'npm test'
+                }
+            }
+        }
         // stage('Backend - Test') {
         //     steps {
         //         dir('10-net9-remix-pg-env/Backend') {
