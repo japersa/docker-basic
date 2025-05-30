@@ -12,6 +12,12 @@ pipeline {
     }
 
     stages {
+        stage('Checkout') {
+            steps {
+                // Clone the GitHub repository
+                git url: 'https://github.com/toromartinezalvaro/docker-basic.git', branch: 'main'
+            }
+        }
         stage('Build') {
             steps {
                 // Restore and build .NET backend
