@@ -72,11 +72,17 @@ pipeline {
                 }
             }
         }
+        // ---
+        // NOTE:
+        // The original project (from the professor) does NOT have a separate test project for the backend.
+        // Therefore, running 'dotnet test' or code coverage on the backend will fail in both this fork and the original.
+        // These stages are commented out to avoid pipeline failures, but the structure is kept for future improvements.
+        // ---
         // stage('Backend - Test') {
         //     steps {
         //         dir('10-net9-remix-pg-env/Backend') {
         //             echo 'Running tests...'
-        //             // sh 'dotnet test --no-build --verbosity normal' // Disabled: Tests should be in a separate test project, not in the main project.
+        //              sh 'dotnet test --no-build --verbosity normal' // Disabled: Tests should be in a separate test project, not in the main project.
         //         }
         //     }
         // }
