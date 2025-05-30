@@ -102,6 +102,14 @@ pipeline {
                 }
             }
         }
+        // stage('Backend - Code Coverage') {
+        //     steps {
+        //         dir('10-net9-remix-pg-env/Backend') {
+        //             echo 'Running code coverage...'
+        //             // sh 'dotnet test --collect:"XPlat Code Coverage" --no-build --verbosity normal' // Disabled: No separate test project available yet.
+        //         }
+        //     }
+        // }
     }
 
     post {
