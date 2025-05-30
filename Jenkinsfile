@@ -72,20 +72,14 @@ pipeline {
                 }
             }
         }
-        // ---
-        // NOTE:
-        // The original project (from the professor) does NOT have a separate test project for the backend.
-        // Therefore, running 'dotnet test' or code coverage on the backend will fail in both this fork and the original.
-        // These stages are commented out to avoid pipeline failures, but the structure is kept for future improvements.
-        // ---
-        // stage('Backend - Test') {
-        //     steps {
-        //         dir('10-net9-remix-pg-env/Backend') {
-        //             echo 'Running tests...'
-        //              sh 'dotnet test --no-build --verbosity normal' // Disabled: Tests should be in a separate test project, not in the main project.
-        //         }
-        //     }
-        // }
+        stage('Backend - Test') {
+            steps {
+                dir('10-net9-remix-pg-env/Backend') {
+                    echo 'Running tests...'
+                    sh 'dotnet test --no-build --verbosity normal'
+                }
+            }
+        }
         stage('Backend - Static Analysis (SonarQube)') {
             steps {
                 dir('10-net9-remix-pg-env/Backend') {
@@ -108,14 +102,14 @@ pipeline {
                 }
             }
         }
-        // stage('Backend - Code Coverage') {
-        //     steps {
-        //         dir('10-net9-remix-pg-env/Backend') {
-        //             echo 'Running code coverage...'
-        //             // sh 'dotnet test --collect:"XPlat Code Coverage" --no-build --verbosity normal' // Disabled: No separate test project available yet.
-        //         }
-        //     }
-        // }
+        stage('Backend - Code Coverage') {
+            steps {
+                dir('10-net9-remix-pg-env/Backend') {
+                    echo 'Running code coverage...'
+                    sh 'dotnet test --collect:"XPlat Code Coverage" --no-build --verbosity normal'
+                }
+            }
+        }
     }
 
     post {
